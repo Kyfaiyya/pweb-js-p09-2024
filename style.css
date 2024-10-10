@@ -469,10 +469,10 @@ nav ul li a:hover {
 
 /* Ensure wrapper takes full width */
 .dropdown-wrapper {
-    width: 100%;              /* Full width for the parent container */
+    width: 100%;              
     display: flex;
-    justify-content: center;   /* Centers the dropdown container */
-    margin: 0 auto;           /* Ensure the container is horizontally centered */
+    justify-content: center;  
+    margin: 0 auto;          
 }
 
 /* Center the dropdown container */
@@ -483,7 +483,7 @@ nav ul li a:hover {
     padding: 10px 0;
 }
 
-/* Style for the dropdown */
+/* Style untuk dropdown */
 #items-per-page {
     padding: 10px 20px;
     font-size: 16px;
@@ -492,9 +492,16 @@ nav ul li a:hover {
     background-color: #fff;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
+    transition: all 0.3s ease-in-out; /* Tambahkan transisi dari remote */
 }
 
-/* Optional: Label styling */
+/* Hover effect dari remote */
+#items-per-page:hover {
+    background-color: #f9f9f9; /* Lightens background on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Lebih kuat bayangan saat hover */
+}
+
+/* Styling untuk label (opsional) */
 .dropdown-container label {
     margin-right: 10px;
     font-size: 16px;
