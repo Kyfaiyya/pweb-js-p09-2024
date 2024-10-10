@@ -90,6 +90,7 @@ nav ul li {
     z-index: 10;
     padding: 15px;
     border-radius: 5px;
+    color: black;
 }
 
 .cart-container:hover .cart-preview {
