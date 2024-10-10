@@ -1,0 +1,372 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 1em;
+}
+
+#product-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2em;
+    justify-content: space-around;
+}
+
+.product {
+    border: 1px solid #ddd;
+    color: #333;
+    margin: 1em;
+    padding: 1em;
+    width: 200px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.product-image-container {
+    width: 100%;
+    height: 150px; /* Sesuaikan tinggi sesuai kebutuhan */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Potong bagian gambar yang keluar dari area */
+    background-color: #f4f4f4; /* Latar belakang untuk area kosong */
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Mengisi area dengan memotong gambar jika diperlukan */
+    border-radius: 5px;
+    display: block;
+}
+
+#cart {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 250px;
+    background-color: #f4f4f4;
+    padding: 1em;
+    box-shadow: -2px 0px 5px rgba(0,0,0,0.2);
+}
+
+#cart-items {
+    list-style: none;
+    padding: 0;
+    color: #000;
+}
+
+#cart-items li {
+    margin-bottom: 1em;
+    color: #000;
+}
+
+/* Keranjang belanja */
+.cart-preview {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    width: 350px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 10;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.cart-container:hover .cart-preview {
+    display: block;
+}
+
+.cart-item {
+    color: #000 !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item-image {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
+.cart-item-details {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.cart-item-details span {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.cart-item-details small {
+    display: block;
+    font-size: 12px;
+    color: #000;
+}
+
+.cart-item button {
+    color: #000;
+    background-color: #e0e0e0;
+    border: none;
+    padding: 5px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+.cart-item button:hover {
+    background-color: #ccc;
+}
+
+.cart-summary {
+    padding-top: 10px;
+    text-align: center;
+    color: #000;
+}
+
+.cart-summary p {
+    font-weight: bold;
+    margin: 0 0 10px;
+    color: #000;
+}
+
+.cart-summary button {
+    background-color: #218838;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cart-summary button:hover {
+    background-color: #218838;
+}
+
+
+/*Part 2*/
+/* Top Bar */
+.top-bar {
+    background-color: #f4f4f4;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.top-bar .app-link {
+    text-decoration: none;
+    color: #333;
+}
+
+.top-nav a {
+    margin-right: 15px;
+    color: #666;
+    text-decoration: none;
+}
+
+.top-nav a:hover {
+    color: #333;
+}
+
+/* Main Bar */
+.main-bar {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: white;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    width: 120px;
+    margin-right: 20px;
+}
+
+.category-button {
+    margin-right: 20px;
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-input {
+    flex: 1;
+    padding: 8px;
+    margin-right: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.icon-nav {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    position: relative;
+    margin-right: 20px;
+    font-size: 24px;
+}
+
+.icon .badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 12px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.user-profile span {
+    margin-left: 10px;
+    color: #666;
+}
+
+/* Bottom Bar */
+.bottom-bar {
+    background-color: white;
+    padding: 10px 20px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-around;
+    font-size: 14px;
+}
+
+.bottom-bar a {
+    text-decoration: none;
+    color: #666;
+    padding: 8px;
+}
+
+.bottom-bar a:hover {
+    color: #22a745;
+}
+
+/* Part 3 */
+/* Cart Container */
+.cart-container {
+    position: relative;
+}
+
+.cart-preview {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    width: 300px;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 10;
+}
+
+.cart-preview ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.cart-preview li {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.cart-preview li button {
+    margin-left: 5px;
+    padding: 5px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+
+.cart-preview .cart-summary {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
+
+/* Show Cart Preview on Hover */
+.cart-container:hover .cart-preview {
+    display: block;
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    max-height: 150px; /* Sesuaikan tinggi maksimum sesuai kebutuhan */
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+#pagination-controls {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#pagination-controls button {
+    margin: 0 5px;
+    padding: 10px 15px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/*apa*/
+
+#pagination-controls button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+#page-info {
+    font-weight: bold;
+    margin: 0 10px;
+}

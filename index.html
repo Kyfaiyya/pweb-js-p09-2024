@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <!-- Main Navigation Bar -->
+        <div class="main-bar">
+            <button class="category-button">Kategori</button>
+            <input type="text" class="search-input" placeholder="Cari di Tokopedia">
+            <nav class="icon-nav">
+                <!-- Cart Container with Hoverable Dropdown -->
+                <div class="cart-container">
+                    <span class="icon cart" id="cart-icon">
+                        🛒 <span class="badge" id="cart-badge">0</span>
+                    </span>
+                    <div class="cart-preview" id="cart-preview">
+                        <ul id="cart-items-list">
+                            <!-- Cart items will be dynamically inserted here by JavaScript -->
+                        </ul>
+                        <div class="cart-summary">
+                            <p>Total: $<span id="preview-total-price">0</span></p>
+                            <button onclick="checkout()">Checkout</button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Product Listing Area -->
+    <main id="product-list">
+        <!-- Products will be dynamically added here via JavaScript -->
+    </main>
+    
+    <!-- Pagination Controls -->
+    <div id="pagination-controls">
+        <button id="prev-page" onclick="changePage(-1)">Previous</button>
+        <span id="page-info"></span>
+        <button id="next-page" onclick="changePage(1)">Next</button>
+    </div>
+    
+    
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
