@@ -359,8 +359,6 @@ nav ul li {
     cursor: pointer;
 }
 
-/*apa*/
-
 #pagination-controls button:disabled {
     background-color: #ddd;
     cursor: not-allowed;
