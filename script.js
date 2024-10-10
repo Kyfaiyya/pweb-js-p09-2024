@@ -1,22 +1,55 @@
 let products = [];
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let currentPage = 1;
-const limit = 20;
+let limit = 20;
 let filteredProducts = [];
 const categoryDropdown = document.getElementById('category-filter');
 const searchBar = document.getElementById('search-bar');
 
-// Fetch Products from API
-async function fetchProducts(page = 1) {
+// Fetch all categories from the API and populate dropdown
+async function fetchCategories() {
+    try {
+        const response = await fetch('https://dummyjson.com/products/categories');
+        const categories = await response.json();
+        
+        // Log the categories to verify the structure
+        console.log("Fetched categories:", categories);
+        
+        // Pass the categories to the populate function
+        populateCategories(categories);
+    } catch (error) {
+        console.error("Failed to fetch categories:", error);
+    }
+}
+
+// Populate categories into dropdown
+function populateCategories(categories) {
+    // Reset the dropdown to have the "All Categories" option
+    categoryDropdown.innerHTML = '<option value="all">All Categories</option>';
+    
+    categories.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category.slug; // Use slug as the value
+        option.textContent = category.name; // Use name for display text
+        categoryDropdown.appendChild(option);
+        
+        // Log each category to verify they are added correctly
+        console.log("Added category to dropdown:", category.name);
+    });
+}
+
+// Fetch Products from API based on page and category
+async function fetchProducts(page = 1, category = 'all') {
     const skip = (page - 1) * limit;
-    const url = `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
+    const url = category === 'all' 
+        ? `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
+        : `https://dummyjson.com/products/category/${category}?limit=${limit}&skip=${skip}`;
     
     try {
         const response = await fetch(url);
         const data = await response.json();
-        products = data.products;
+        products = data.products || data;
         filteredProducts = products;
-        populateCategories();
         displayProducts(filteredProducts);
     } catch (error) {
         console.error("Failed to fetch products:", error);
@@ -24,22 +57,11 @@ async function fetchProducts(page = 1) {
     }
 }
 
-// Populate categories to dropdown
-function populateCategories() {
-    const categories = [...new Set(products.map(product => product.category))];
-    categories.forEach(category => {
-        const option = document.createElement('option');
-        option.value = category;
-        option.textContent = category.charAt(0).toUpperCase() + category.slice(1);
-        categoryDropdown.appendChild(option);
-    });
-}
-
 // Filter products by category
 categoryDropdown.addEventListener('change', () => {
     const selectedCategory = categoryDropdown.value;
-    filteredProducts = selectedCategory === 'all' ? products : products.filter(product => product.category === selectedCategory);
-    displayProducts(filteredProducts);
+    currentPage = 1; // Reset to first page when category changes
+    fetchProducts(currentPage, selectedCategory);
 });
 
 // Search products by name
@@ -121,18 +143,17 @@ function decreaseQuantity(productId) {
     updateCart();
 }
 
-
 // Function to remove item from cart
 function removeFromCart(productId) {
     cart = cart.filter(item => item.id !== productId);
     updateCart();
 }
 
-
 // Pagination
 function changePage(direction) {
     currentPage += direction;
-    fetchProducts(currentPage);
+    const selectedCategory = categoryDropdown.value;
+    fetchProducts(currentPage, selectedCategory);
 }
 
 // Checkout
@@ -147,6 +168,7 @@ function checkout() {
 }
 
 // Initialize
+fetchCategories(); // Fetch and populate categories on page load
 fetchProducts(currentPage);
 updateCart();
 
