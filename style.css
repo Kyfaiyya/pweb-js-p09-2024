@@ -467,45 +467,36 @@ nav ul li a:hover {
     margin: 0 10px;
 }
 
-/* Enhanced style for the dropdown container */
+/* Ensure wrapper takes full width */
+.dropdown-wrapper {
+    width: 100%;              /* Full width for the parent container */
+    display: flex;
+    justify-content: center;   /* Centers the dropdown container */
+    margin: 0 auto;           /* Ensure the container is horizontally centered */
+}
+
+/* Center the dropdown container */
 .dropdown-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 20px 0;  /* Adjust for spacing */
+    padding: 10px 0;
 }
 
-/* Enhanced style for the dropdown */
+/* Style for the dropdown */
 #items-per-page {
     padding: 10px 20px;
     font-size: 16px;
-    border-radius: 8px;  /* Rounded corners */
-    border: 1px solid #ccc;  /* Light gray border */
-    background-color: #fff;  /* White background */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
-    color: #333;  /* Dark text color */
-    appearance: none;  /* Remove default OS styling */
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: all 0.3s ease;  /* Smooth transition for hover effect */
 }
 
-/* Dropdown hover effect */
-#items-per-page:hover {
-    background-color: #f3f3f3;  /* Lighter background on hover */
-    border-color: #888;  /* Slightly darker border on hover */
-}
-
-/* Optional styling for the label */
+/* Optional: Label styling */
 .dropdown-container label {
     margin-right: 10px;
     font-size: 16px;
-    color: #444;  /* Medium-dark color for label */
-}
-
-/* Optional: Custom arrow for dropdown */
-#items-per-page {
-    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="%23666"><path d="M7 7l3-3 3 3H7z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 10px;
+    color: #444;
 }
