@@ -38,12 +38,18 @@
         </div>
     </header>
 
-    <!-- Add this dropdown for changing number of items per page -->
-<select id="items-per-page">
-    <option value="5">5 items</option>
-    <option value="10">10 items</option>
-    <option value="20">20 items</option>
-</select>
+    <!-- Ensure a wrapper div with full width -->
+<div class="dropdown-wrapper">
+    <div class="dropdown-container">
+        <label for="items-per-page">Items per page: </label>
+        <select id="items-per-page">
+            <option value="5">5 items</option>
+            <option value="10">10 items</option>
+            <option value="20">20 items</option>
+        </select>
+    </div>
+</div>
+
 
     <!-- Product Listing Area -->
     <main id="product-list">
