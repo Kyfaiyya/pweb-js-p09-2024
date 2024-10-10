@@ -467,27 +467,45 @@ nav ul li a:hover {
     margin: 0 10px;
 }
 
-#items-per-page-dropdown {
-    position: relative;  /* Allows the element to be positioned relative to its normal position */
-    left: 20px;          /* Moves the element to the right */
-    padding: 10px;       /* Makes the button larger */
-    font-size: 16px;     /* Increases font size */
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
+/* Enhanced style for the dropdown container */
+.dropdown-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;  /* Adjust for spacing */
 }
 
-#items-per-page-dropdown:hover {
-    background-color: #f9f9f9; /* Lightens background on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-#items-per-page-dropdown select {
-    padding: 10px;
-    font-size: 16px; /* Matches the button size */
-    border: none;
-    background: transparent;
+/* Enhanced style for the dropdown */
+#items-per-page {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;  /* Rounded corners */
+    border: 1px solid #ccc;  /* Light gray border */
+    background-color: #fff;  /* White background */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
+    color: #333;  /* Dark text color */
+    appearance: none;  /* Remove default OS styling */
     cursor: pointer;
+    transition: all 0.3s ease;  /* Smooth transition for hover effect */
+}
+
+/* Dropdown hover effect */
+#items-per-page:hover {
+    background-color: #f3f3f3;  /* Lighter background on hover */
+    border-color: #888;  /* Slightly darker border on hover */
+}
+
+/* Optional styling for the label */
+.dropdown-container label {
+    margin-right: 10px;
+    font-size: 16px;
+    color: #444;  /* Medium-dark color for label */
+}
+
+/* Optional: Custom arrow for dropdown */
+#items-per-page {
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="%23666"><path d="M7 7l3-3 3 3H7z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
 }
