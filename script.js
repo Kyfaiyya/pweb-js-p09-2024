@@ -80,7 +80,7 @@ function addToCart(productId, title, price, thumbnail) {
     updateCart();
 }
 
-// Update cart
+// Update cart function (with increase/decrease buttons)
 function updateCart() {
     localStorage.setItem('cart', JSON.stringify(cart));
     const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
@@ -95,11 +95,39 @@ function updateCart() {
         cartItem.innerHTML = `
             <img src="${item.thumbnail}" alt="${item.title}" class="cart-item-image">
             <span>${item.title} - $${item.price} x ${item.quantity}</span>
+            <button onclick="increaseQuantity(${item.id})">+</button>
+            <button onclick="decreaseQuantity(${item.id})">-</button>
+            <button onclick="removeFromCart(${item.id})">Remove</button>
         `;
         cartItemsList.appendChild(cartItem);
     });
     document.getElementById('preview-total-price').textContent = totalPrice.toFixed(2);
 }
+
+// Increase and decrease quantity functions
+function increaseQuantity(productId) {
+    const product = cart.find(item => item.id === productId);
+    product.quantity += 1;
+    updateCart();
+}
+
+function decreaseQuantity(productId) {
+    const product = cart.find(item => item.id === productId);
+    if (product.quantity > 1) {
+        product.quantity -= 1;
+    } else {
+        removeFromCart(productId);
+    }
+    updateCart();
+}
+
+
+// Function to remove item from cart
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    updateCart();
+}
+
 
 // Pagination
 function changePage(direction) {
@@ -121,3 +149,10 @@ function checkout() {
 // Initialize
 fetchProducts(currentPage);
 updateCart();
+
+// Change number of items per page
+const itemsPerPageDropdown = document.getElementById('items-per-page');
+itemsPerPageDropdown.addEventListener('change', () => {
+    limit = parseInt(itemsPerPageDropdown.value);
+    fetchProducts(currentPage);  // Fetch products again with new limit
+});
