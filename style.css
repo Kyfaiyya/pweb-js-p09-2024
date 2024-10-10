@@ -100,7 +100,7 @@ nav ul li a:hover {
 }
 
 .product button:hover {
-    background-color: #1e8c3d;
+    background-color: #a01a50;
 }
 
 /* Product Image */
@@ -231,7 +231,7 @@ nav ul li a:hover {
 }
 
 .cart-summary button {
-    background-color: #218838;
+    background-color: #9331de;
     color: #fff;
     border: none;
     padding: 8px 16px;
@@ -240,7 +240,7 @@ nav ul li a:hover {
 }
 
 .cart-summary button:hover {
-    background-color: #218838;
+    background-color: #a01a50;
 }
 
 /* Pagination */
@@ -262,7 +262,7 @@ nav ul li a:hover {
 }
 
 #pagination-controls button:hover {
-    background-color: #1e8c3d;
+    background-color: #8c1e5a;
 }
 
 #page-info {
@@ -450,7 +450,7 @@ nav ul li a:hover {
 #pagination-controls button {
     margin: 0 5px;
     padding: 10px 15px;
-    background-color: #333;
+    background-color: #7518e6;
     color: white;
     border: none;
     border-radius: 5px;
