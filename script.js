@@ -5,17 +5,23 @@ let limit = 20;
 let filteredProducts = [];
 const categoryDropdown = document.getElementById('category-filter');
 const searchBar = document.getElementById('search-bar');
+const itemsPerPageDropdown = document.getElementById('items-per-page'); // Move this to the top
+
+// Set default options for items per page
+function setItemsPerPageOptions() {
+    itemsPerPageDropdown.innerHTML = `
+        <option value="20" selected>20 items</option>
+        <option value="10">10 items</option>
+        <option value="5">5 items</option>
+    `;
+}
 
 // Fetch all categories from the API and populate dropdown
 async function fetchCategories() {
     try {
         const response = await fetch('https://dummyjson.com/products/categories');
         const categories = await response.json();
-        
-        // Log the categories to verify the structure
         console.log("Fetched categories:", categories);
-        
-        // Pass the categories to the populate function
         populateCategories(categories);
     } catch (error) {
         console.error("Failed to fetch categories:", error);
@@ -24,16 +30,12 @@ async function fetchCategories() {
 
 // Populate categories into dropdown
 function populateCategories(categories) {
-    // Reset the dropdown to have the "All Categories" option
     categoryDropdown.innerHTML = '<option value="all">All Categories</option>';
-    
     categories.forEach(category => {
         const option = document.createElement('option');
-        option.value = category.slug; // Use slug as the value
-        option.textContent = category.name; // Use name for display text
+        option.value = category.slug;
+        option.textContent = category.name;
         categoryDropdown.appendChild(option);
-        
-        // Log each category to verify they are added correctly
         console.log("Added category to dropdown:", category.name);
     });
 }
@@ -56,6 +58,14 @@ async function fetchProducts(page = 1, category = 'all') {
         alert("Could not load products. Please try again later.");
     }
 }
+
+// Handle change in items per page
+itemsPerPageDropdown.addEventListener('change', () => {
+    limit = parseInt(itemsPerPageDropdown.value); // Update limit with selected value
+    currentPage = 1; // Reset to the first page when limit changes
+    const selectedCategory = categoryDropdown.value;
+    fetchProducts(currentPage, selectedCategory);  // Fetch products again with new limit
+});
 
 // Filter products by category
 categoryDropdown.addEventListener('change', () => {
@@ -168,13 +178,7 @@ function checkout() {
 }
 
 // Initialize
+setItemsPerPageOptions(); // Initialize the items per page dropdown
 fetchCategories(); // Fetch and populate categories on page load
 fetchProducts(currentPage);
 updateCart();
-
-// Change number of items per page
-const itemsPerPageDropdown = document.getElementById('items-per-page');
-itemsPerPageDropdown.addEventListener('change', () => {
-    limit = parseInt(itemsPerPageDropdown.value);
-    fetchProducts(currentPage);  // Fetch products again with new limit
-});
