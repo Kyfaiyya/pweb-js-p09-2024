@@ -5,25 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Commerce Website</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <!-- Header -->
     <header>
+        <div class="header-content">
+            <h1 class="brand-title">EverythingMart</h1>
+        </div>
         <div class="main-bar">
-            <!-- Shop Title -->
-            <h1 class="brand-title">EverythingMart</h1> <!-- Shop name reflecting variety of products -->
-            <!-- Category Filter -->
-            <select id="category-filter">
-                <option value="all">All Categories</option>
-                <!-- Categories will be populated via JavaScript -->
-            </select>
-
-            <!-- Search Bar -->
-            <input type="text" class="search-input" placeholder="Search Products" id="search-bar">
-
-            <!-- Cart Container -->
+            <div class="search-container">
+                <select id="category-filter">
+                    <option value="all">All Categories</option>
+                </select>
+                <input type="text" class="search-input" placeholder="Search Products" id="search-bar">
+            </div>
             <nav class="icon-nav">
                 <div class="cart-container">
                     <span class="icon cart" id="cart-icon">
@@ -41,10 +37,10 @@
         </div>
     </header>
 
-    <!-- Ensure a wrapper div with full width -->
+    <!-- Dropdown for items per page -->
     <div class="dropdown-wrapper">
         <div class="dropdown-container">
-            <label for="items-per-page">Items per page: </label>
+            <label for="items-per-page">Items per page:</label>
             <select id="items-per-page">
                 <option value="5">5 items</option>
                 <option value="10">10 items</option>
@@ -53,14 +49,12 @@
         </div>
     </div>
 
-    <!-- Product Listing Area -->
-    <main id="product-list">
-        <!-- Products will be added dynamically via JavaScript -->
-    </main>
+    <!-- Product Listing -->
+    <main id="product-list"></main>
 
     <!-- Pagination Controls -->
     <div id="pagination-controls">
-        <button id="prev-page" onclick="changePage(-1)">Previous</button>
+        <button id="prev-page" onclick="changePage(-1)" disabled>Previous</button>
         <span id="page-info">Page 1</span>
         <button id="next-page" onclick="changePage(1)">Next</button>
     </div>
