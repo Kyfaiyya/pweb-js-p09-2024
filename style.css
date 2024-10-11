@@ -381,58 +381,6 @@ nav ul li a:hover {
     color: #22a745;
 }
 
-/* Part 3 */
-/* Cart Container */
-.cart-container {
-    position: relative;
-}
-
-.cart-preview {
-    position: absolute;
-    top: 30px;
-    right: 0;
-    width: 300px;
-    background-color: white;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: none;
-    z-index: 10;
-}
-
-.cart-preview ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-.cart-preview li {
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.cart-preview li button {
-    margin-left: 5px;
-    padding: 5px;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-
-.cart-preview .cart-summary {
-    padding: 10px;
-    border-top: 1px solid #ddd;
-    text-align: center;
-}
-
-/* Show Cart Preview on Hover */
-.cart-container:hover .cart-preview {
-    display: block;
-}
-
 .product-image {
     width: 100%;
     height: auto;
