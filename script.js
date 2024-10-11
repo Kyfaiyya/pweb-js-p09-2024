@@ -5,7 +5,9 @@ let limit = 20;
 let filteredProducts = [];
 const categoryDropdown = document.getElementById('category-filter');
 const searchBar = document.getElementById('search-bar');
-const itemsPerPageDropdown = document.getElementById('items-per-page'); // Move this to the top
+const itemsPerPageDropdown = document.getElementById('items-per-page');
+const cartIcon = document.getElementById('cart-icon');
+const cartPreview = document.querySelector('.cart-preview');
 
 // Set default options for items per page
 function setItemsPerPageOptions() {
@@ -21,7 +23,6 @@ async function fetchCategories() {
     try {
         const response = await fetch('https://dummyjson.com/products/categories');
         const categories = await response.json();
-        console.log("Fetched categories:", categories);
         populateCategories(categories);
     } catch (error) {
         console.error("Failed to fetch categories:", error);
@@ -33,10 +34,9 @@ function populateCategories(categories) {
     categoryDropdown.innerHTML = '<option value="all">All Categories</option>';
     categories.forEach(category => {
         const option = document.createElement('option');
-        option.value = category.slug;
-        option.textContent = category.name;
+        option.value = category;
+        option.textContent = category.charAt(0).toUpperCase() + category.slice(1);
         categoryDropdown.appendChild(option);
-        console.log("Added category to dropdown:", category.name);
     });
 }
 
@@ -46,7 +46,7 @@ async function fetchProducts(page = 1, category = 'all') {
     const url = category === 'all' 
         ? `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
         : `https://dummyjson.com/products/category/${category}?limit=${limit}&skip=${skip}`;
-    
+
     try {
         const response = await fetch(url);
         const data = await response.json();
@@ -61,17 +61,15 @@ async function fetchProducts(page = 1, category = 'all') {
 
 // Handle change in items per page
 itemsPerPageDropdown.addEventListener('change', () => {
-    limit = parseInt(itemsPerPageDropdown.value); // Update limit with selected value
-    currentPage = 1; // Reset to the first page when limit changes
-    const selectedCategory = categoryDropdown.value;
-    fetchProducts(currentPage, selectedCategory);  // Fetch products again with new limit
+    limit = parseInt(itemsPerPageDropdown.value);
+    currentPage = 1;
+    fetchProducts(currentPage, categoryDropdown.value);
 });
 
 // Filter products by category
 categoryDropdown.addEventListener('change', () => {
-    const selectedCategory = categoryDropdown.value;
-    currentPage = 1; // Reset to first page when category changes
-    fetchProducts(currentPage, selectedCategory);
+    currentPage = 1;
+    fetchProducts(currentPage, categoryDropdown.value);
 });
 
 // Search products by name
@@ -124,16 +122,26 @@ function updateCart() {
     cart.forEach(item => {
         totalPrice += item.price * item.quantity;
         const cartItem = document.createElement('li');
+        cartItem.classList.add('cart-item');
         cartItem.innerHTML = `
-            <img src="${item.thumbnail}" alt="${item.title}" class="cart-item-image">
-            <span>${item.title} - $${item.price} x ${item.quantity}</span>
-            <button onclick="increaseQuantity(${item.id})">+</button>
-            <button onclick="decreaseQuantity(${item.id})">-</button>
+            <div class="cart-item-image-container">
+                <img src="${item.thumbnail}" alt="${item.title}" class="cart-item-image">
+            </div>
+            <div class="cart-item-details">
+                <span class="cart-item-title">${item.title}</span>
+                <span>$${item.price} x ${item.quantity}</span>
+            </div>
+            <div class="cart-item-quantity">
+                <button onclick="increaseQuantity(${item.id})">+</button>
+                <button onclick="decreaseQuantity(${item.id})">-</button>
+                <button class="remove-button" onclick="removeFromCart(${item.id})">Remove</button>
+            </div>
         `;
         cartItemsList.appendChild(cartItem);
     });
     document.getElementById('preview-total-price').textContent = totalPrice.toFixed(2);
 }
+
 
 // Increase and decrease quantity functions
 function increaseQuantity(productId) {
@@ -161,8 +169,7 @@ function removeFromCart(productId) {
 // Pagination
 function changePage(direction) {
     currentPage += direction;
-    const selectedCategory = categoryDropdown.value;
-    fetchProducts(currentPage, selectedCategory);
+    fetchProducts(currentPage, categoryDropdown.value);
 }
 
 // Checkout
@@ -175,6 +182,22 @@ function checkout() {
     cart = [];
     updateCart();
 }
+
+// Toggle cart preview visibility when clicking cart icon
+cartIcon.addEventListener('click', () => {
+    if (cartPreview.style.display === 'none' || cartPreview.style.display === '') {
+        cartPreview.style.display = 'block';
+    } else {
+        cartPreview.style.display = 'none';
+    }
+});
+
+// Hide cart preview when clicking outside of it
+document.addEventListener('click', (event) => {
+    if (!cartIcon.contains(event.target) && !cartPreview.contains(event.target)) {
+        cartPreview.style.display = 'none';
+    }
+});
 
 // Initialize
 setItemsPerPageOptions(); // Initialize the items per page dropdown
