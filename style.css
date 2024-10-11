@@ -6,15 +6,36 @@ body {
     color: #333;
 }
 
+/* Header Container */
 header {
-    background-color: #de4b90;
-    color: white;
-    padding: 1.5em;
+    background: linear-gradient(45deg, #FF69B4, #FF1493);
+    padding: 20px 0;
     text-align: center;
-    font-size: 1.2em;
-    font-weight: bold;
-    letter-spacing: 1px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    margin-bottom: 20px;
+}
+
+.brand-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 50px;
+    font-weight: 700;
+    color: rgb(165, 69, 102);
+    margin: 0;
+}
+
+/* Main Bar Styling */
+.main-bar {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* Navigation Menu */
@@ -22,12 +43,18 @@ nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 nav ul li {
     display: inline-block;
     margin-right: 1.5em;
+}
+
+nav ul li:last-child {
+    margin-right: 0;
 }
 
 nav ul li a {
@@ -36,12 +63,61 @@ nav ul li a {
     font-weight: bold;
     font-size: 1.1em;
     padding: 5px;
+    transition: border-bottom 0.3s ease, color 0.3s ease;
 }
 
 nav ul li a:hover {
     border-bottom: 2px solid #22a745;
+    color: #22a745;
 }
 
+/* Search Bar & Category Filter */
+.search-container {
+    display: flex;
+    flex-grow: 1;
+    gap: 10px;
+}
+
+#category-filter, .search-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+    flex-grow: 1;
+    padding: 10px 15px;
+}
+
+/* Cart Icon Styling */
+.icon-nav {
+    display: flex;
+    align-items: center;
+}
+
+.cart-container {
+    position: relative;
+}
+
+.icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 4px 7px;
+    font-size: 12px;
+}
 
 /* Product List */
 #product-list {
@@ -137,15 +213,20 @@ nav ul li a:hover {
 #cart-items {
     list-style: none;
     padding: 0;
-    color: #000;
 }
 
 #cart-items li {
     margin-bottom: 1em;
-    color: #000;
 }
 
-/* Keranjang belanja */
+#cart-items-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+}
+
+/* Cart Preview */
 .cart-preview {
     position: absolute;
     top: 30px;
@@ -158,7 +239,6 @@ nav ul li a:hover {
     z-index: 10;
     padding: 15px;
     border-radius: 5px;
-    color: black;
 }
 
 .cart-container:hover .cart-preview {
@@ -166,7 +246,6 @@ nav ul li a:hover {
 }
 
 .cart-item {
-    color: #000 !important;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -204,7 +283,6 @@ nav ul li a:hover {
 }
 
 .cart-item button {
-    color: #000;
     background-color: #e0e0e0;
     border: none;
     padding: 5px 8px;
@@ -221,17 +299,15 @@ nav ul li a:hover {
 .cart-summary {
     padding-top: 10px;
     text-align: center;
-    color: #000;
 }
 
 .cart-summary p {
     font-weight: bold;
     margin: 0 0 10px;
-    color: #000;
 }
 
 .cart-summary button {
-    background-color: #9331de;
+    background-color: #218838;
     color: #fff;
     border: none;
     padding: 8px 16px;
@@ -240,208 +316,10 @@ nav ul li a:hover {
 }
 
 .cart-summary button:hover {
-    background-color: #a01a50;
+    background-color: #218838;
 }
 
 /* Pagination */
-#pagination-controls {
-    text-align: center;
-    margin: 20px 0;
-}
-
-#pagination-controls button {
-    margin: 0 5px;
-    padding: 10px 15px;
-    background-color: #22a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.2s ease;
-}
-
-#pagination-controls button:hover {
-    background-color: #8c1e5a;
-}
-
-#page-info {
-    font-weight: bold;
-    margin: 0 10px;
-    color: #333;
-}
-/*Part 2*/
-/* Top Bar */
-.top-bar {
-    background-color: #f4f4f4;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.top-bar .app-link {
-    text-decoration: none;
-    color: #333;
-}
-
-.top-nav a {
-    margin-right: 15px;
-    color: #666;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.top-nav a:hover {
-    color: #22a745;
-}
-
-/* Main Bar */
-.main-bar {
-    display: flex;
-    align-items: center;
-    padding: 15px 20px;
-    background-color: white;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-}
-
-.logo {
-    width: 120px;
-    margin-right: 20px;
-}
-
-.category-button {
-    margin-right: 20px;
-    padding: 8px 12px;
-    background-color: #f0f0f0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.search-input {
-    flex: 1;
-    padding: 8px;
-    margin-right: 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.icon-nav {
-    display: flex;
-    align-items: center;
-}
-
-.icon {
-    position: relative;
-    margin-right: 20px;
-    font-size: 24px;
-}
-
-.icon .badge {
-    position: absolute;
-    top: -5px;
-    right: -10px;
-    background-color: red;
-    color: white;
-    border-radius: 50%;
-    padding: 2px 5px;
-    font-size: 12px;
-}
-
-.user-profile {
-    display: flex;
-    align-items: center;
-}
-
-.user-profile span {
-    margin-left: 10px;
-    color: #666;
-}
-
-/* Bottom Bar */
-.bottom-bar {
-    background-color: white;
-    padding: 15px;
-    border-top: 1px solid #ddd;
-    display: flex;
-    justify-content: space-around;
-    font-size: 14px;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.bottom-bar a {
-    text-decoration: none;
-    color: #666;
-    transition: color 0.3s;
-}
-
-.bottom-bar a:hover {
-    color: #22a745;
-}
-
-/* Part 3 */
-/* Cart Container */
-.cart-container {
-    position: relative;
-}
-
-.cart-preview {
-    position: absolute;
-    top: 30px;
-    right: 0;
-    width: 300px;
-    background-color: white;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: none;
-    z-index: 10;
-}
-
-.cart-preview ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-.cart-preview li {
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.cart-preview li button {
-    margin-left: 5px;
-    padding: 5px;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-
-.cart-preview .cart-summary {
-    padding: 10px;
-    border-top: 1px solid #ddd;
-    text-align: center;
-}
-
-/* Show Cart Preview on Hover */
-.cart-container:hover .cart-preview {
-    display: block;
-}
-
-.product-image {
-    width: 100%;
-    height: auto;
-    max-height: 150px; /* Sesuaikan tinggi maksimum sesuai kebutuhan */
-    object-fit: cover;
-    margin-bottom: 10px;
-    border-radius: 5px;
-}
-
 #pagination-controls {
     text-align: center;
     margin: 20px 0;
@@ -467,15 +345,14 @@ nav ul li a:hover {
     margin: 0 10px;
 }
 
-/* Ensure wrapper takes full width */
+/* Dropdown Styling */
 .dropdown-wrapper {
-    width: 100%;              
+    width: 100%;
     display: flex;
-    justify-content: center;  
-    margin: 0 auto;          
+    justify-content: center;
+    margin: 0 auto;
 }
 
-/* Center the dropdown container */
 .dropdown-container {
     display: flex;
     justify-content: center;
@@ -483,7 +360,6 @@ nav ul li a:hover {
     padding: 10px 0;
 }
 
-/* Style untuk dropdown */
 #items-per-page {
     padding: 10px 20px;
     font-size: 16px;
@@ -492,18 +368,24 @@ nav ul li a:hover {
     background-color: #fff;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: all 0.3s ease-in-out; /* Tambahkan transisi dari remote */
+    transition: all 0.3s ease-in-out;
 }
 
-/* Hover effect dari remote */
 #items-per-page:hover {
-    background-color: #f9f9f9; /* Lightens background on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Lebih kuat bayangan saat hover */
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Styling untuk label (opsional) */
 .dropdown-container label {
     margin-right: 10px;
     font-size: 16px;
     color: #444;
+}
+
+button {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
