@@ -5,16 +5,37 @@ body {
     background-color: #e8cae8;
     color: #333;
 }
-
+/* Header Container */
 header {
-    background-color: #de4b90;
-    color: white;
-    padding: 1.5em;
+    background: linear-gradient(45deg, #FF69B4, #FF1493); /* Gradient background */
+    padding: 20px 0;
     text-align: center;
-    font-size: 1.2em;
-    font-weight: bold;
-    letter-spacing: 1px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Shop Title */
+.header-content {
+    margin-bottom: 20px; /* Add space between title and main-bar */
+}
+
+.brand-title {
+    font-family: 'Playfair Display', serif; /* Apply Playfair Display font */
+    font-size: 50px; /* Make the font size large and aesthetic */
+    font-weight: 700; /* Bold weight for emphasis */
+    color: rgb(165, 69, 102); /* Adjust color as needed */
+    margin: 0;
+}
+
+/* Main Bar Styling */
+.main-bar {
+    background-color: white; /* White background for the search and category area */
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 1200px;
+    margin: 0 auto; /* Center the main-bar */
 }
 
 /* Navigation Menu */
@@ -22,7 +43,9 @@ nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    text-align: center;
+    display: flex; /* Use flexbox to align items horizontally */
+    justify-content: center; /* Center the navigation menu */
+    align-items: center;
 }
 
 nav ul li {
@@ -30,18 +53,77 @@ nav ul li {
     margin-right: 1.5em;
 }
 
+nav ul li:last-child {
+    margin-right: 0; /* Remove margin from the last item */
+}
+
 nav ul li a {
-    color: white;
+    color: white; /* Ensure white color for nav links */
     text-decoration: none;
     font-weight: bold;
     font-size: 1.1em;
     padding: 5px;
+    transition: border-bottom 0.3s ease, color 0.3s ease; /* Smooth transition for hover effect */
 }
 
 nav ul li a:hover {
-    border-bottom: 2px solid #22a745;
+    border-bottom: 2px solid #22a745; /* Green border-bottom on hover */
+    color: #22a745; /* Change text color to match border on hover */
 }
 
+/* Search Bar & Category Filter */
+.search-container {
+    display: flex;
+    flex-grow: 1;
+    gap: 10px; /* Add space between category dropdown and search bar */
+}
+
+#category-filter {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.search-input {
+    flex-grow: 1; /* Makes the search bar take available space */
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+/* Cart Icon Styling */
+.icon-nav {
+    display: flex;
+    align-items: center;
+}
+
+.cart-container {
+    position: relative;
+}
+
+.icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 4px 7px;
+    font-size: 12px;
+}
 
 /* Product List */
 #product-list {
@@ -379,6 +461,11 @@ nav ul li a:hover {
 
 .bottom-bar a:hover {
     color: #22a745;
+}
+
+/* Show Cart Preview on Hover */
+.cart-container:hover .cart-preview {
+    display: block;
 }
 
 .product-image {
