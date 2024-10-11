@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Commerce Website</title>
     <link rel="stylesheet" href="style.css">
+<<<<<<< HEAD
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+=======
+>>>>>>> 5dae918240a9747b6950dfb4be9a350b66289d7e
 </head>
 <body>
     <!-- Header -->
     <header>
+<<<<<<< HEAD
         <div class="header-content">
             <h1 class="brand-title">EverythingMart</h1>
         </div>
@@ -20,13 +24,22 @@
                 </select>
                 <input type="text" class="search-input" placeholder="Search Products" id="search-bar">
             </div>
+=======
+        <!-- Main Navigation Bar -->
+        <div class="main-bar">
+            <button class="category-button">Kategori</button>
+            <input type="text" class="search-input" placeholder="Cari di Tokopedia">
+>>>>>>> 5dae918240a9747b6950dfb4be9a350b66289d7e
             <nav class="icon-nav">
+                <!-- Cart Container with Hoverable Dropdown -->
                 <div class="cart-container">
                     <span class="icon cart" id="cart-icon">
                         🛒 <span class="badge" id="cart-badge">0</span>
                     </span>
                     <div class="cart-preview" id="cart-preview">
-                        <ul id="cart-items-list"></ul>
+                        <ul id="cart-items-list">
+                            <!-- Cart items will be dynamically inserted here by JavaScript -->
+                        </ul>
                         <div class="cart-summary">
                             <p>Total: $<span id="preview-total-price">0</span></p>
                             <button onclick="checkout()">Checkout</button>
@@ -36,6 +49,7 @@
             </nav>
         </div>
     </header>
+<<<<<<< HEAD
 
     <!-- Dropdown for items per page -->
     <div class="dropdown-wrapper">
@@ -56,9 +70,22 @@
     <div id="pagination-controls">
         <button id="prev-page" onclick="changePage(-1)" disabled>Previous</button>
         <span id="page-info">Page 1</span>
+=======
+    
+    <!-- Product Listing Area -->
+    <main id="product-list">
+        <!-- Products will be dynamically added here via JavaScript -->
+    </main>
+    
+    <!-- Pagination Controls -->
+    <div id="pagination-controls">
+        <button id="prev-page" onclick="changePage(-1)">Previous</button>
+        <span id="page-info"></span>
+>>>>>>> 5dae918240a9747b6950dfb4be9a350b66289d7e
         <button id="next-page" onclick="changePage(1)">Next</button>
     </div>
-
+    
+    
     <!-- External JavaScript -->
     <script src="script.js"></script>
 </body>
