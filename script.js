@@ -129,7 +129,6 @@ function updateCart() {
             <span>${item.title} - $${item.price} x ${item.quantity}</span>
             <button onclick="increaseQuantity(${item.id})">+</button>
             <button onclick="decreaseQuantity(${item.id})">-</button>
-            <button onclick="removeFromCart(${item.id})">Remove</button>
         `;
         cartItemsList.appendChild(cartItem);
     });
