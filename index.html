@@ -5,24 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Commerce Website</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
     <header>
-        <!-- Main Navigation Bar -->
+        <div class="header-content">
+            <h1 class="brand-title">EverythingMart</h1>
+        </div>
         <div class="main-bar">
-            <button class="category-button">Kategori</button>
-            <input type="text" class="search-input" placeholder="Cari di Tokopedia">
+            <div class="search-container">
+                <select id="category-filter">
+                    <option value="all">All Categories</option>
+                </select>
+                <input type="text" class="search-input" placeholder="Search Products" id="search-bar">
+            </div>
             <nav class="icon-nav">
-                <!-- Cart Container with Hoverable Dropdown -->
                 <div class="cart-container">
                     <span class="icon cart" id="cart-icon">
                         🛒 <span class="badge" id="cart-badge">0</span>
                     </span>
                     <div class="cart-preview" id="cart-preview">
-                        <ul id="cart-items-list">
-                            <!-- Cart items will be dynamically inserted here by JavaScript -->
-                        </ul>
+                        <ul id="cart-items-list"></ul>
                         <div class="cart-summary">
                             <p>Total: $<span id="preview-total-price">0</span></p>
                             <button onclick="checkout()">Checkout</button>
@@ -32,23 +36,33 @@
             </nav>
         </div>
     </header>
-    
-    <!-- Product Listing Area -->
-    <main id="product-list">
-        <!-- Products will be dynamically added here via JavaScript -->
+
+    <!-- Dropdown for items per page -->
+    <div class="dropdown-wrapper">
+        <div class="dropdown-container">
+            <label for="items-per-page">Items per page:</label>
+            <select id="items-per-page">
+                <option value="5">5 items</option>
+                <option value="10">10 items</option>
+                <option value="20" selected>20 items</option>
+            </select>
+        </div>
+    </div>
+
+    <main>
+        <div id="product-list" class="product-list">
+            <!-- Produk akan ditampilkan secara dinamis -->
+        </div>
     </main>
-    
+
     <!-- Pagination Controls -->
     <div id="pagination-controls">
-        <button id="prev-page" onclick="changePage(-1)">Previous</button>
-        <span id="page-info"></span>
+        <button id="prev-page" onclick="changePage(-1)" disabled>Previous</button>
+        <span id="page-info">Page 1</span>
         <button id="next-page" onclick="changePage(1)">Next</button>
     </div>
-    
-    
+
     <!-- External JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
-
-<!---->
