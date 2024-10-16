@@ -5,6 +5,7 @@ body {
     background-color: #e8cae8;
     color: #333;
 }
+
 /* Header Container */
 header {
     background: linear-gradient(45deg, #FF69B4, #FF1493); /* Gradient background */
@@ -113,7 +114,7 @@ nav ul li a:hover {
 .icon {
     font-size: 24px;
     cursor: pointer;
-    color: #333; /* Tambahkan warna agar lebih jelas */
+    color: #333;
 }
 
 .badge {
@@ -302,7 +303,6 @@ nav ul li a:hover {
     word-wrap: break-word; /* Memungkinkan teks panjang untuk dibagi menjadi dua baris */
 }
 
-
 /* Styling untuk tombol quantity dan tombol remove */
 .cart-item-quantity {
     display: flex;
@@ -365,16 +365,12 @@ nav ul li a:hover {
     background-color: #218838;
 }
 
-
-
 /* Responsive Design */
 @media (max-width: 400px) {
     .cart-preview {
         width: 90%; /* Responsive width for smaller screens */
     }
 }
-
-
 
 /* Pagination */
 #pagination-controls {
@@ -403,7 +399,7 @@ nav ul li a:hover {
     margin: 0 10px;
     color: #333;
 }
-/*Part 2*/
+
 /* Top Bar */
 .top-bar {
     background-color: #f4f4f4;
@@ -528,37 +524,12 @@ nav ul li a:hover {
     border-radius: 5px;
 }
 
-#pagination-controls {
-    text-align: center;
-    margin: 20px 0;
-}
-
-#pagination-controls button {
-    margin: 0 5px;
-    padding: 10px 15px;
-    background-color: #7518e6;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#pagination-controls button:disabled {
-    background-color: #ddd;
-    cursor: not-allowed;
-}
-
-#page-info {
-    font-weight: bold;
-    margin: 0 10px;
-}
-
 /* Ensure wrapper takes full width */
 .dropdown-wrapper {
-    width: 100%;              
+    width: 100%;
     display: flex;
-    justify-content: center;  
-    margin: 0 auto;          
+    justify-content: center;
+    margin: 0 auto;
 }
 
 /* Center the dropdown container */
@@ -578,13 +549,13 @@ nav ul li a:hover {
     background-color: #fff;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: all 0.3s ease-in-out; /* Tambahkan transisi dari remote */
+    transition: all 0.3s ease-in-out;
 }
 
-/* Hover effect dari remote */
+/* Hover effect untuk dropdown */
 #items-per-page:hover {
-    background-color: #f9f9f9; /* Lightens background on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Lebih kuat bayangan saat hover */
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* Styling untuk label (opsional) */
@@ -603,8 +574,4 @@ nav ul li a:hover {
         opacity: 1;
         transform: translateY(0);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 5dae918240a9747b6950dfb4be9a350b66289d7e
