@@ -1,24 +1,23 @@
 let products = [];
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let currentPage = 1;
-let limit = 20;
+let limit = 500;
 let filteredProducts = [];
-const categoryDropdown = document.getElementById('category-filter');
-const searchBar = document.getElementById('search-bar');
+const searchBar = document.querySelector('.search-input');
 const itemsPerPageDropdown = document.getElementById('items-per-page');
 const cartIcon = document.getElementById('cart-icon');
-const cartPreview = document.querySelector('.cart-preview');
+const cartPreview = document.getElementById('cart-preview');
 
-// Set default options for items per page
 function setItemsPerPageOptions() {
-    itemsPerPageDropdown.innerHTML = `
-        <option value="20" selected>20 items</option>
-        <option value="10">10 items</option>
-        <option value="5">5 items</option>
-    `;
+    if (itemsPerPageDropdown) {
+        itemsPerPageDropdown.innerHTML = `
+            <option value="20" selected>20 items</option>
+            <option value="10">10 items</option>
+            <option value="5">5 items</option>
+        `;
+    }
 }
 
-// Fetch all categories from the API and populate dropdown
 async function fetchCategories() {
     try {
         const response = await fetch('https://dummyjson.com/products/categories');
@@ -29,18 +28,20 @@ async function fetchCategories() {
     }
 }
 
-// Populate categories into dropdown
 function populateCategories(categories) {
-    categoryDropdown.innerHTML = '<option value="all">All Categories</option>';
-    categories.forEach(category => {
-        const option = document.createElement('option');
-        option.value = category;
-        option.textContent = category.charAt(0).toUpperCase() + category.slice(1);
-        categoryDropdown.appendChild(option);
-    });
+    const categoryDropdown = document.getElementById('category-filter');
+    if (categoryDropdown) {
+        categoryDropdown.innerHTML = '<option value="all">All Categories</option>';
+        categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category; // Use the category string as the value
+            option.textContent = category.charAt(0).toUpperCase() + category.slice(1); // Capitalize the first letter
+            categoryDropdown.appendChild(option);
+        });
+    }
 }
 
-// Fetch Products from API based on page and category
+
 async function fetchProducts(page = 1, category = 'all') {
     const skip = (page - 1) * limit;
     const url = category === 'all' 
@@ -60,43 +61,54 @@ async function fetchProducts(page = 1, category = 'all') {
 }
 
 // Handle change in items per page
-itemsPerPageDropdown.addEventListener('change', () => {
-    limit = parseInt(itemsPerPageDropdown.value);
-    currentPage = 1;
-    fetchProducts(currentPage, categoryDropdown.value);
-});
+if (itemsPerPageDropdown) {
+    itemsPerPageDropdown.addEventListener('change', () => {
+        limit = parseInt(itemsPerPageDropdown.value);
+        currentPage = 1;
+        fetchProducts(currentPage);
+const pageInfo = document.getElementById('page-info');
+if (pageInfo) {
+    pageInfo.textContent = `Page ${currentPage}`;
+}
+    });
+}
 
-// Filter products by category
-categoryDropdown.addEventListener('change', () => {
-    currentPage = 1;
-    fetchProducts(currentPage, categoryDropdown.value);
-});
+const categoryDropdown = document.getElementById('category-filter');
+if (categoryDropdown) {
+    categoryDropdown.addEventListener('change', () => {
+        currentPage = 1;
+        fetchProducts(currentPage, categoryDropdown.value);
+    });
+}
 
-// Search products by name
-searchBar.addEventListener('input', () => {
-    const searchText = searchBar.value.toLowerCase();
-    filteredProducts = products.filter(product => product.title.toLowerCase().includes(searchText));
-    displayProducts(filteredProducts);
-});
+ if (searchBar) {
+    searchBar.addEventListener('input', () => {
+        const searchText = searchBar.value.toLowerCase();
+        filteredProducts = products.filter(product => product.title.toLowerCase().includes(searchText));
+        displayProducts(filteredProducts);
+    });
+}
 
 // Display products
 function displayProducts(products) {
     const productList = document.getElementById('product-list');
-    productList.innerHTML = '';
+    if (productList) {
+        productList.innerHTML = '';
 
-    products.forEach(product => {
-        const productDiv = document.createElement('div');
-        productDiv.classList.add('product');
-        productDiv.innerHTML = `
-            <div class="product-image-container">
-                <img src="${product.thumbnail}" alt="${product.title}" class="product-image">
-            </div>
-            <h3>${product.title}</h3>
-            <p>$${product.price}</p>
-            <button onclick="addToCart(${product.id}, '${product.title}', ${product.price}, '${product.thumbnail}')">Add to Cart</button>
-        `;
-        productList.appendChild(productDiv);
-    });
+        products.forEach(product => {
+            const productDiv = document.createElement('div');
+            productDiv.classList.add('product');
+            productDiv.innerHTML = `
+                <div class="product-image-container">
+                    <img src="${product.thumbnail}" alt="${product.title}" class="product-image">
+                </div>
+                <h3>${product.title}</h3>
+                <p>$${product.price}</p>
+                <button onclick="addToCart(${product.id}, '${product.title}', ${product.price}, '${product.thumbnail}')">Add to Cart</button>
+            `;
+            productList.appendChild(productDiv);
+        });
+    }
 }
 
 // Add item to cart
@@ -116,32 +128,33 @@ function updateCart() {
     const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
     document.getElementById('cart-badge').textContent = cartCount;
     const cartItemsList = document.getElementById('cart-items-list');
-    cartItemsList.innerHTML = '';
+    if (cartItemsList) {
+        cartItemsList.innerHTML = '';
 
-    let totalPrice = 0;
-    cart.forEach(item => {
-        totalPrice += item.price * item.quantity;
-        const cartItem = document.createElement('li');
-        cartItem.classList.add('cart-item');
-        cartItem.innerHTML = `
-            <div class="cart-item-image-container">
-                <img src="${item.thumbnail}" alt="${item.title}" class="cart-item-image">
-            </div>
-            <div class="cart-item-details">
-                <span class="cart-item-title">${item.title}</span>
-                <span>$${item.price} x ${item.quantity}</span>
-            </div>
-            <div class="cart-item-quantity">
-                <button onclick="increaseQuantity(${item.id})">+</button>
-                <button onclick="decreaseQuantity(${item.id})">-</button>
-                <button class="remove-button" onclick="removeFromCart(${item.id})">Remove</button>
-            </div>
-        `;
-        cartItemsList.appendChild(cartItem);
-    });
-    document.getElementById('preview-total-price').textContent = totalPrice.toFixed(2);
+        let totalPrice = 0;
+        cart.forEach(item => {
+            totalPrice += item.price * item.quantity;
+            const cartItem = document.createElement('li');
+            cartItem.classList.add('cart-item');
+            cartItem.innerHTML = `
+                <div class="cart-item-image-container">
+                    <img src="${item.thumbnail}" alt="${item.title}" class="cart-item-image">
+                </div>
+                <div class="cart-item-details">
+                    <span class="cart-item-title">${item.title}</span>
+                    <span>$${item.price} x ${item.quantity}</span>
+                </div>
+                <div class="cart-item-quantity">
+                    <button onclick="increaseQuantity(${item.id})">+</button>
+                    <button onclick="decreaseQuantity(${item.id})">-</button>
+                    <button class="remove-button" onclick="removeFromCart(${item.id})">Remove</button>
+                </div>
+            `;
+            cartItemsList.appendChild(cartItem);
+        });
+        document.getElementById('preview-total-price').textContent = totalPrice.toFixed(2);
+    }
 }
-
 
 // Increase and decrease quantity functions
 function increaseQuantity(productId) {
@@ -169,7 +182,14 @@ function removeFromCart(productId) {
 // Pagination
 function changePage(direction) {
     currentPage += direction;
-    fetchProducts(currentPage, categoryDropdown.value);
+    const pageInfo = document.getElementById('page-info');
+    if (currentPage < 1) {
+        currentPage = 1;
+    }
+    fetchProducts(currentPage, categoryDropdown ? categoryDropdown.value : 'all');
+    if (pageInfo) {
+        pageInfo.textContent = `Page ${currentPage}`;
+    }
 }
 
 // Checkout
@@ -184,13 +204,11 @@ function checkout() {
 }
 
 // Toggle cart preview visibility when clicking cart icon
-cartIcon.addEventListener('click', () => {
-    if (cartPreview.style.display === 'none' || cartPreview.style.display === '') {
-        cartPreview.style.display = 'block';
-    } else {
-        cartPreview.style.display = 'none';
-    }
-});
+if (cartIcon) {
+    cartIcon.addEventListener('click', () => {
+        cartPreview.style.display = cartPreview.style.display === 'block' ? 'none' : 'block';
+    });
+}
 
 // Hide cart preview when clicking outside of it
 document.addEventListener('click', (event) => {
@@ -200,7 +218,7 @@ document.addEventListener('click', (event) => {
 });
 
 // Initialize
-setItemsPerPageOptions(); // Initialize the items per page dropdown
-fetchCategories(); // Fetch and populate categories on page load
+setItemsPerPageOptions();
+fetchCategories();
 fetchProducts(currentPage);
 updateCart();
