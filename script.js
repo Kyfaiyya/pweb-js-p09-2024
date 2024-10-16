@@ -30,16 +30,23 @@ async function fetchCategories() {
 
 function populateCategories(categories) {
     const categoryDropdown = document.getElementById('category-filter');
-    if (categoryDropdown) {
-        categoryDropdown.innerHTML = '<option value="all">All Categories</option>';
-        categories.forEach(category => {
-            const option = document.createElement('option');
-            option.value = category; // Use the category string as the value
-            option.textContent = category.charAt(0).toUpperCase() + category.slice(1); // Capitalize the first letter
-            categoryDropdown.appendChild(option);
-        });
+    if (!categoryDropdown) {
+        console.warn("category-filter element not found.");
+        return;
     }
+    categoryDropdown.innerHTML = '<option value="all">All Categories</option>';
+    categories.forEach(category => {
+        if (category && typeof category === 'object' && category.name && category.slug) { // Ensure data is valid
+            const option = document.createElement('option');
+            option.value = category.slug; // Use slug as the value for filtering
+            option.textContent = category.name.charAt(0).toUpperCase() + category.name.slice(1); // Capitalize the category name
+            categoryDropdown.appendChild(option);
+        } else {
+            console.warn("Invalid category data:", category);
+        }
+    });
 }
+
 
 
 async function fetchProducts(page = 1, category = 'all') {
